@@ -163,6 +163,28 @@ class RepeatedFieldTest < Test::Unit::TestCase
       arr[0..2]
     end
     check_self_modifying_method(m.repeated_string, reference_arr) do |arr|
+      arr[0..5]
+    end
+    check_self_modifying_method(m.repeated_string, reference_arr) do |arr|
+      arr[0..-1]
+    end
+    check_self_modifying_method(m.repeated_string, reference_arr) do |arr|
+      arr[0...-1] # Exclusive range
+    end
+    check_self_modifying_method(m.repeated_string, reference_arr) do |arr|
+      arr[-2..-1]
+    end
+    check_self_modifying_method(m.repeated_string, reference_arr) do |arr|
+      arr[-5..-1]
+    end
+    check_self_modifying_method(m.repeated_string, reference_arr) do |arr|
+      arr[0..] # Infinite range
+    end
+    check_self_modifying_method(m.repeated_string, reference_arr) do |arr|
+      # Beginless range; introduced in Ruby 2.7, though, it's a SyntaxError in JRuby
+      # arr[..-1]
+    end
+    check_self_modifying_method(m.repeated_string, reference_arr) do |arr|
       arr[-1, 1]
     end
     check_self_modifying_method(m.repeated_string, reference_arr) do |arr|
